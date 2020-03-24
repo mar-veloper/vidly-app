@@ -29,7 +29,7 @@ class RegisterForm extends Form {
       await userService.register(this.state.data);
     } catch (ex) {
       if (ex.response && ex.response.status === 400);
-      toast.error(ex.response.data, { position: toast.POSITION.TOP_CENTER });
+      toast.error(ex.response.data);
 
       // const errors = this.state.errors;
       // errors.username = ex.response.data;
