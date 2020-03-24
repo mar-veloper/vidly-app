@@ -27,7 +27,7 @@ class LoginForm extends Form {
         data.password
       );
       localStorage.setItem("token", jwt);
-      this.props.history.push("/");
+      window.location = "/";
     } catch (ex) {
       if (ex.response && ex.response.status >= 400 && ex.response.status < 500);
 
