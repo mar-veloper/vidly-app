@@ -5,7 +5,7 @@ import Like from "./common/like";
 import auth from "../services/authService";
 
 class MoviesTable extends Component {
-  deleteButton = () => {
+  deleteColumn = () => {
     const user = auth.getCurrentUser();
     if (user && user.isAdmin)
       return movie => (
@@ -36,7 +36,7 @@ class MoviesTable extends Component {
     },
     {
       key: "delete",
-      content: this.deleteButton()
+      content: this.deleteColumn()
     }
   ];
 
