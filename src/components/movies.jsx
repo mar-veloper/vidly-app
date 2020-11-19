@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
-import MoviesTable from "./moviesTable";
-import ListGroup from "./common/listGroup";
-import Pagination from "./common/pagination";
-import { getMovies, deleteMovie } from "../services/movieService";
-import { getGenres } from "../services/genreService";
-import { paginate } from "../utils/paginate";
-import _ from "lodash";
-import SearchBox from "./searchBox";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import MoviesTable from './moviesTable';
+import ListGroup from './common/listGroup';
+import Pagination from './common/pagination';
+import { getMovies, deleteMovie } from '../services/movieService';
+import { getGenres } from '../services/genreService';
+import { paginate } from '../utils/paginate';
+import _ from 'lodash';
+import SearchBox from './searchBox';
 
 class Movies extends Component {
   state = {
@@ -16,14 +16,14 @@ class Movies extends Component {
     genres: [],
     currentPage: 1,
     pageSize: 4,
-    searchQuery: "",
+    searchQuery: '',
     selectedGenre: null,
-    sortColumn: { path: "title", order: "asc" }
+    sortColumn: { path: 'title', order: 'asc' },
   };
 
   async componentDidMount() {
     const { data } = await getGenres();
-    const genres = [{ _id: "", name: "All Genres" }, ...data];
+    const genres = [{ _id: '', name: 'All Genres' }, ...data];
 
     const { data: movies } = await getMovies();
     this.setState({ movies, genres });
@@ -57,7 +57,7 @@ class Movies extends Component {
   };
 
   handleGenreSelect = genre => {
-    this.setState({ selectedGenre: genre, searchQuery: "", currentPage: 1 });
+    this.setState({ selectedGenre: genre, searchQuery: '', currentPage: 1 });
   };
 
   handleSearch = query => {
@@ -75,13 +75,13 @@ class Movies extends Component {
       sortColumn,
       selectedGenre,
       searchQuery,
-      movies: allMovies
+      movies: allMovies,
     } = this.state;
 
     let filtered = allMovies;
     if (searchQuery)
       filtered = allMovies.filter(m =>
-        m.title.toLowerCase().startsWith(searchQuery.toLowerCase())
+        m.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
     else if (selectedGenre && selectedGenre._id)
       filtered = allMovies.filter(m => m.genre._id === selectedGenre._id);
